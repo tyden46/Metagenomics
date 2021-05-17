@@ -3,8 +3,7 @@ library(myTAI)
 library(plyr)
 library(stringr)
 library(dplyr)
-setwd("C:/Users/tyson/OneDrive/Desktop/Coronavirus\ Proteins/UpdatedHackensack/subset_5Million")
-Sys.getenv('ENTREZ_KEY')
+args <- commandArgs(trailingOnly = TRUE)
 listOfFiles=list.files(pattern="N.*.tsv")
 tableExists=FALSE
 counter=1
