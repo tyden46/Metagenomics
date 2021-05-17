@@ -5,11 +5,11 @@ library(plyr)
 library(stringr)
 library(dplyr)
 args <- commandArgs(trailingOnly = TRUE)
-listOfFiles=list.files(pattern="N.*.tsv")
+listOfFiles=list.files(pattern="*.tsv")
 tableExists=FALSE
 counter=1
 for(x in listOfFiles){
-  fileName=str_extract(x,"NJ-BioR-[0-9]{3}")
+  fileName=str_remove_all(x,".tsv")
   thisAbundance=read.delim(x,skip=1)
   row.names(thisAbundance)=thisAbundance$Genome
   thisAbundance=as.data.frame(thisAbundance[,2], row.names=row.names(thisAbundance))
@@ -30,8 +30,8 @@ for(x in listOfFiles){
 }
 combinedTable[is.na(combinedTable)]=0
 write.table(combinedTable,file="CombinedTable.tsv",sep='\t',quote=FALSE,row.names = TRUE)
-write.table(names(which(rowSums(combinedTable)>0.01)),file="SumGreaterThan0.01.txt",sep='\n',row.names = FALSE,col.names = FALSE)
-length(which(rowSums(combinedTable)>0.01))
+write.table(names(which(rowSums(combinedTable)>args[1])),file="SubsetOfGenomes.txt",sep='\n',row.names = FALSE,col.names = FALSE)
+length(which(rowSums(combinedTable)>args[1]))
 for(y in row.names(combinedTable)){
   print(y)
 }
