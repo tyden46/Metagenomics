@@ -1,6 +1,5 @@
 library(vroom)
 library(dplyr)
-setwd("C:/Users/tyson/OneDrive/Desktop/Coronavirus Proteins/UpdatedHackensack/subset_5Million/PhyloMap")
 taxaAndRanks=as.data.frame(vroom("taxaAndRanks.txt"))
 counter=1
 for(x in 1:length(row.names(taxaAndRanks))){
