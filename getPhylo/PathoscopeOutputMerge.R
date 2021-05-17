@@ -1,5 +1,6 @@
-library(taxize)
-library(myTAI)
+suppressMessages(suppressWarnings(require(plyr)))
+suppressMessages(suppressWarnings(require(stringr)))
+suppressMessages(suppressWarnings(require(dplyr)))
 library(plyr)
 library(stringr)
 library(dplyr)
@@ -10,11 +11,6 @@ counter=1
 for(x in listOfFiles){
   fileName=str_extract(x,"NJ-BioR-[0-9]{3}")
   thisAbundance=read.delim(x,skip=1)
-  #if(length(row.names(thisAbundance))>=10){
-    #thisAbundance=as.data.frame(thisAbundance[1:10,])
-  #}else{
-    #thisAbundance=as.data.frame(thisAbundance[1:length(row.names(thisAbundance)),])
-  #}
   row.names(thisAbundance)=thisAbundance$Genome
   thisAbundance=as.data.frame(thisAbundance[,2], row.names=row.names(thisAbundance))
   colnames(thisAbundance)="Final.Guess"
